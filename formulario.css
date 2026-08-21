@@ -1,0 +1,26 @@
+/* 1. CAMPOS IMPARES (1, 3, 5, 7...) */
+.form-grid .field-container:nth-child(odd) input,
+.form-grid .field-container:nth-child(odd) select,
+.form-grid .field-container:nth-child(odd) textarea {
+  background-color: #ffffff;
+  border-left: 4px solid #4f46e5; /* Indentado azul en la izquierda */
+}
+
+/* 2. CAMPOS PARES (2, 4, 6, 8...) */
+.form-grid .field-container:nth-child(even) input,
+.form-grid .field-container:nth-child(even) select,
+.form-grid .field-container:nth-child(even) textarea {
+  background-color: #f8fafc;
+  border-left: 4px solid #ec4899; /* Indentado rosa en la izquierda */
+}
+
+/* 3. EFECTO AL ENFOCAR (Mantiene el movimiento de izquierda a derecha) */
+.form-grid .field-container:nth-child(odd) input:focus {
+  transform: translateX(8px);
+  background-color: #f0fdf4; /* Fondo verdoso para impares seleccionados */
+}
+
+.form-grid .field-container:nth-child(even) input:focus {
+  transform: translateX(8px);
+  background-color: #fdf2f8; /* Fondo rosado para pares seleccionados */
+}

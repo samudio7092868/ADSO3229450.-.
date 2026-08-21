@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Completo: first-child, nth-child y last-child</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1e293b;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .field-container {
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .field-container label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      color: #475569;
+      transition: all 0.3s ease;
+    }
+
+    .field-container input,
+    .field-container select {
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #cbd5e1;
+      font-size: 0.95rem;
+      outline: none;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    /* ===================================================
+       1. PSEUDOCLASE :first-child (Primer campo)
+       =================================================== */
+    .form-grid .field-container:first-child input {
+      border-left: 6px solid #10b981 !important; /* Borde Verde */
+      background-color: #f0fdf4;
+    }
+
+    .form-grid .field-container:first-child label::after {
+      content: " ★ (Campo Principal)";
+      color: #10b981;
+      font-size: 0.8rem;
+    }
+
+    /* ===================================================
+       2. PSEUDOCLASE :nth-child (Campos Pares e Impares)
+       =================================================== */
+
+    /* Impares (1, 3, 5...) */
+    .form-grid .field-container:nth-child(odd) input,
+    .form-grid .field-container:nth-child(odd) select {
+      border-left: 5px solid #6366f1; /* Morado */
+      background-color: #ffffff;
+    }
+
+    /* Pares (2, 4, 6...) */
+    .form-grid .field-container:nth-child(even) input,
+    .form-grid .field-container:nth-child(even) select {
+      border-left: 5px solid #ec4899; /* Rosa */
+      background-color: #f8fafc;
+    }
+
+    /* EFECTO FOCUS (Seleccionar y escribir de izq. a derecha) */
+    .form-grid .field-container:nth-child(odd) input:focus,
+    .form-grid .field-container:nth-child(odd) select:focus {
+      border-color: #6366f1;
+      background-color: #eeeffe;
+      text-align: right;
+      transform: translateX(10px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .form-grid .field-container:nth-child(even) input:focus,
+    .form-grid .field-container:nth-child(even) select:focus {
+      border-color: #ec4899;
+      background-color: #fdf2f8;
+      text-align: right;
+      transform: translateX(10px);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+    }
+
+    /* ===================================================
+       3. PSEUDOCLASE :last-child (Último campo)
+       =================================================== */
+    .form-grid .field-container:last-child select {
+      border-left: 6px solid #f59e0b !important; /* Borde Ámbar */
+      background-color: #fffbeb;
+    }
+
+    .form-grid .field-container:last-child label::after {
+      content: " ⚠️ (Paso Final)";
+      color: #d97706;
+      font-size: 0.8rem;
+    }
+
+    /* Movimiento de etiqueta al seleccionar */
+    .field-container:focus-within label {
+      transform: translateX(10px);
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0f172a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Registro de Usuario</h2>
+
+    <form class="form-grid">
+
+      <!-- Campo 1: Funciona con :first-child y :nth-child(odd) -->
+      <div class="field-container">
+        <label for="nombre">1. Nombre</label>
+        <input type="text" id="nombre" placeholder="Ej. Carlos">
+      </div>
+
+      <!-- Campo 2: Funciona con :nth-child(even) -->
+      <div class="field-container">
+        <label for="apellido">2. Apellido</label>
+        <input type="text" id="apellido" placeholder="Ej. Mendoza">
+      </div>
+
+      <!-- Campo 3: Funciona con :nth-child(odd) -->
+      <div class="field-container">
+        <label for="correo">3. Correo</label>
+        <input type="email" id="correo" placeholder="correo@ejemplo.com">
+      </div>
+
+      <!-- Campo 4: Funciona con :nth-child(even) -->
+      <div class="field-container">
+        <label for="telefono">4. Teléfono</label>
+        <input type="tel" id="telefono" placeholder="+34 600 000 000">
+      </div>
+
+      <!-- Campo 5: Funciona con :last-child y :nth-child(odd) -->
+      <div class="field-container">
+        <label for="pais">5. País</label>
+        <select id="pais">
+          <option value="">Selecciona un país</option>
+          <option value="es">España</option>
+          <option value="mx">México</option>
+          <option value="co">Colombia</option>
+        </select>
+      </div>
+
+      <button type="submit">Enviar Registro</button>
+
+    </form>
+  </div>
+
+</body>
+</html>
